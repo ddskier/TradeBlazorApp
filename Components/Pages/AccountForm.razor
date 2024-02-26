@@ -1,0 +1,94 @@
+﻿@page "/accountform"
+@using TradeBlazorApp.Business_Classes
+@using TradeBlazorApp.Data_Classes
+@rendermode InteractiveServer
+@inject IAccountService AccountService
+@inject NavigationManager NavigationManager
+
+
+
+<PageTitle>Account Details</PageTitle>
+
+@if (GlobalSettings.LoggedIn)
+{
+    <EditForm Model="@accountProfile" OnValidSubmit="HandleValidSubmit">
+        <DataAnnotationsValidator />
+        <table class="form-table">
+            <tr class="form-group">
+                <td>
+                    <label class="white-label" for="FullName">Full Name:</label>
+                </td>
+                <td>
+                    <InputText id="FullName" class="custom-input" @bind-Value="accountProfile.FullName" />
+                </td>
+            </tr>
+            <tr class="form-group">
+                <td>
+                    <label class="white-label" for="Address">Address:</label>
+                </td>
+                <td>
+                    <InputText id="Address" class="custom-input" @bind-Value="accountProfile.Address" />
+                </td>
+            </tr>
+            <tr class="form-group">
+                <td>
+                    <label class="white-label" for="Email">Email:</label>
+                </td>
+                <td>
+                    <InputText id="Email" class="custom-input" @bind-Value="accountProfile.Email" />
+                </td>
+            </tr>
+            <tr class="form-group">
+                <td>
+                    <label class="white-label" for="CreditCard">Credit Card:</label>
+                </td>
+                <td>
+                    <InputText id="CreditCard" class="custom-input" @bind-Value="accountProfile.CreditCard" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <button class="std-button">Update Account</button>
+                </td>
+            </tr>
+        </table>
+    </EditForm>
+
+}
+else
+{
+    <label class="red-label">You must login first!</label>
+
+}
+<label class="red-label">@labelText</label>
+<label class="white-label">@confirmText</label>
+
+
+@code {
+
+
+
+    public string message;
+    public string labelText;
+    public string confirmText;
+    public AccountProfile accountProfile = GlobalSettings.theLoginAccount;
+
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+
+            AccountService.UpdateAccountDetailsAsync(GlobalSettings.theLoginAccount.UserId, accountProfile);
+            confirmText = "Account Updated!";
+        }
+        catch (Exception e)
+        {
+            labelText = e.Message.ToString();
+
+        }
+
+    }
+
+    
+}

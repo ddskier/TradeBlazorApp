@@ -1,0 +1,107 @@
+﻿@page "/buy/"
+
+
+@using TradeBlazorApp.Data_Classes
+@using Microsoft.EntityFrameworkCore
+@using TradeBlazorApp.Business_Classes <!--Added Manually this and below 2 lines, eventually through Interaction 48 and others.. Also, it generated renderMode, should have been rendermode no caps -->
+@rendermode InteractiveServer   
+
+@inject NavigationManager NavigationManager
+@inject QUOTEDBEntities context
+@inject IStockService StockService   
+
+<PageTitle>Buy Stock</PageTitle>
+
+
+<!--Changing from isVisible to rather check login status -->
+@if (GlobalSettings.LoggedIn)  
+{
+    <div>
+        <h3 class="white-label">Select the Number of Shares to Buy for Symbol @GlobalSettings.theCurrentQuote.Symbol</h3>
+        <EditForm Model="@this" OnValidSubmit="@BuyStock">
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+
+            <table class="form-table">
+                <tr>
+                    <td>
+                        <label class="white-label" for="numShares">Number of Shares:</label>
+                    </td>
+                    <td>
+                        <InputNumber @bind-Value="numShares" class="form-control" id="numShares" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <button type="submit" class="std-button">Buy</button>
+                    </td>
+                </tr>
+            </table>
+        </EditForm>
+
+        <button class="std-button" @onclick="Hide">Return to Quotes</button>
+        <label class="white-label">@messageBuy</label>
+    </div>
+
+}
+else
+{
+    <label class="red-label">You must login before you can buy stocks!</label>
+   
+}
+<label class="red-label">@labelText</label>
+
+@code {
+  //  [Parameter]
+  //  public Quote quote { get; set; }
+
+    //Added above per ChatGTP Interaction 64, then took out per Interaction 66, stop trying to pass params, just use GlobalSettings.
+    
+   // public string symbol = ;           //Changed to public from private, so Quotes.Razor can reference when showing Buy.Blazor.  Now commented out, will be a parameter via
+   //ChatGTP Interaction 64.  I must now fixup the calling page (Quotes,Razor) to pass the parameter 'symbol'.
+    public bool isVisible = false;   //Changed to public from private, so Quotes.Razor can reference when showing Buy.Blazor
+    public int? numShares;          //Changed to public from private, so Quotes.Razor can reference when showing Buy.Blazor
+    public string labelText;        //Changed to public
+    public string messageBuy;       //Added for confirm message
+
+    // Method to show the component with the selected stock symbol:  I commented these out during UI fixup stage after getting to ChatGTP Interaction 64
+    
+   /* public void Show(string selectedSymbol)
+    {
+        symbol = selectedSymbol;
+        isVisible = true;
+    }
+
+    // Method to hide the component
+    
+    */
+    // Method to handle stock purchase
+
+    private void Hide()
+    {
+       NavigationManager.NavigateTo("/quotes");
+    }
+    private async Task BuyStock()
+    {
+        if (numShares.HasValue)
+        {
+
+            try
+            {
+                var result = await StockService.Buy(GlobalSettings.theCurrentQuote.Symbol, numShares.Value); //Fixup Needed:  Changed this call via Interaction 47 with ChatGTP
+
+            }
+            catch (Exception e)
+            {
+                labelText = e.ToString();
+            }
+            // Assume StockService is a service class you have to handle stock transactions
+           
+            messageBuy = "You just bought " + numShares.Value + " of stock " + GlobalSettings.theCurrentQuote.Symbol + "!";
+            numShares = null; // Reset after purchase
+           
+           // Hide(); // Hide the component after purchase
+           // NavigationManager.NavigateTo("/quotes"); // Optionally navigate to a different page  -- I changed to navigate back to holdings vs "/"
+        }
+    }
+}
