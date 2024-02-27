@@ -29,6 +29,12 @@
         <tr>
             <td><button class="huge-button" @onclick="ShowAccountForm">Account</button></td>
         </tr>
+        <tr>
+            <td><button class="std-button" @onclick="ShowDoc">Migration Doc Download</button></td>
+        </tr>
+        <tr>
+            <td><button class="std-button" @onclick="ShowPPT">Migration Presentation Download</button></td>
+        </tr>
     </table>
 </div>
 
@@ -79,5 +85,17 @@
         {
             labelText = "You Must Login First!";
         }
+    }
+
+    private void ShowDoc()
+    {
+        NavigationManager.NavigateTo("/GAP_PROJECT_NOTES.docx");
+        
+    }
+
+    private void ShowPPT()
+    {
+        NavigationManager.NavigateTo("/GAPMoblize_Project_DryRun_2_27.pptx");
+
     }
 }
