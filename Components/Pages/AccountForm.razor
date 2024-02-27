@@ -8,6 +8,8 @@
 
 
 <PageTitle>Account Details</PageTitle>
+<button class="std-button" @onclick="GoMainNav">Return to Main Menu</button>
+<br />
 
 @if (GlobalSettings.LoggedIn)
 {
@@ -89,6 +91,9 @@ else
         }
 
     }
-
+    void GoMainNav()
+    {
+        NavigationManager.NavigateTo($"/");
+    }
     
 }

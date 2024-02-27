@@ -15,7 +15,8 @@
 
 <PageTitle>Sell Stock</PageTitle>
 
-
+<button class="std-button" @onclick="GoMainNav">Return to Main Menu</button>
+<br />
 <!--Changing from isVisible to rather check login status -->
 @if (GlobalSettings.LoggedIn)
 {
@@ -113,5 +114,9 @@ else
             messageBadSell = "Please select a value for Number of Shares of stock " + GlobalSettings.theCurrentQuote.Symbol + " to sell!";
             numShares = null; // Reset after purchase
         }
+    }
+    void GoMainNav()
+    {
+        NavigationManager.NavigateTo($"/");
     }
 }

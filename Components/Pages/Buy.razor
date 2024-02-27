@@ -11,6 +11,9 @@
 
 <PageTitle>Buy Stock</PageTitle>
 
+<button class="std-button" @onclick="GoMainNav">Return to Main Menu</button>
+<br />
+
 <!--Changing from isVisible to rather check login status -->
 @if (GlobalSettings.LoggedIn)  
 {
@@ -97,5 +100,9 @@ else
            // Hide(); // Hide the component after purchase
            // NavigationManager.NavigateTo("/quotes"); // Optionally navigate to a different page  -- I changed to navigate back to holdings vs "/"
         }
+    }
+    void GoMainNav()
+    {
+        NavigationManager.NavigateTo($"/");
     }
 }

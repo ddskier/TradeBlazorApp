@@ -13,6 +13,8 @@
 <!-- I added a new Style class red-label for Warning/Error Labels, per ChatGTP interaction 60 -->
 <label class="red-label">@labelText</label>
 <br />
+<button class="std-button" @onclick="GoMainNav">Return to Main Menu</button>
+<br />
 
 @if (quotes != null)
 {
@@ -74,6 +76,10 @@
         StateHasChanged(); // This may be necessary to inform Blazor that the component's state has changed and it needs to re-render.
     }
 
+    void GoMainNav()
+    {
+        NavigationManager.NavigateTo($"/");
+    }
     void BuyStock(Quote quote)  //I manually Fixed case from QUOTE to Quote
     {
         // Your logic to handle stock purchase
