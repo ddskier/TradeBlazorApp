@@ -1,7 +1,6 @@
 
 //This entire code was copied from ChatGTP 4.0, re Interaction 13.  From start to finish, after sending ir, per #13, my previous entire definition for Program.cs
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using TradeBlazorApp.Business_Classes;
 using TradeBlazorApp.Components;
 using TradeBlazorApp.Data_Classes;

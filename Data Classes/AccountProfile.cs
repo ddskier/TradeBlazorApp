@@ -4,12 +4,11 @@
 
 namespace TradeBlazorApp.Data_Classes
 {
-    using Microsoft.EntityFrameworkCore;
     //The following is cute and paste, directly from ChatGTP interaction 25
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    
+
 
 
     [Table("ACCOUNTPROFILE", Schema = "dbo")]
@@ -21,7 +20,7 @@ namespace TradeBlazorApp.Data_Classes
         [Column("PASSWORD", TypeName = "varchar(50)")]
         public string Password { get; set; }
 
-       // [Key]  This table has a composite key, and per ChatGTP Interaction 49, I need to remove all [Key] annotations and use OnModelCreate to create composite key
+        // [Key]  This table has a composite key, and per ChatGTP Interaction 49, I need to remove all [Key] annotations and use OnModelCreate to create composite key
         [Column("USERID", TypeName = "varchar(50)", Order = 0)]
         [Required]
         public string UserId { get; set; }
@@ -43,7 +42,7 @@ namespace TradeBlazorApp.Data_Classes
         [Column("SALT", TypeName = "varchar(20)")]
         public string Salt { get; set; }
 
-       
+
     }
 
 }

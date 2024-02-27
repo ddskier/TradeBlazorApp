@@ -20,7 +20,7 @@ namespace TradeBlazorApp.Data_Classes
 
             // Configure the composite key for AccountProfile
             modelBuilder.Entity<Quote>().HasKey(e => new { e.QuoteId, e.Symbol });
-            
+
 
         }
     }

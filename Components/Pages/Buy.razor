@@ -5,13 +5,11 @@
 @using Microsoft.EntityFrameworkCore
 @using TradeBlazorApp.Business_Classes <!--Added Manually this and below 2 lines, eventually through Interaction 48 and others.. Also, it generated renderMode, should have been rendermode no caps -->
 @rendermode InteractiveServer   
-
 @inject NavigationManager NavigationManager
 @inject QUOTEDBEntities context
 @inject IStockService StockService   
 
 <PageTitle>Buy Stock</PageTitle>
-
 
 <!--Changing from isVisible to rather check login status -->
 @if (GlobalSettings.LoggedIn)  
@@ -42,7 +40,6 @@
         <button class="std-button" @onclick="Hide">Return to Quotes</button>
         <label class="white-label">@messageBuy</label>
     </div>
-
 }
 else
 {
@@ -85,7 +82,6 @@ else
     {
         if (numShares.HasValue)
         {
-
             try
             {
                 var result = await StockService.Buy(GlobalSettings.theCurrentQuote.Symbol, numShares.Value); //Fixup Needed:  Changed this call via Interaction 47 with ChatGTP
@@ -96,10 +92,8 @@ else
                 labelText = e.ToString();
             }
             // Assume StockService is a service class you have to handle stock transactions
-           
             messageBuy = "You just bought " + numShares.Value + " of stock " + GlobalSettings.theCurrentQuote.Symbol + "!";
             numShares = null; // Reset after purchase
-           
            // Hide(); // Hide the component after purchase
            // NavigationManager.NavigateTo("/quotes"); // Optionally navigate to a different page  -- I changed to navigate back to holdings vs "/"
         }
