@@ -1,7 +1,7 @@
 ﻿namespace TradeBlazorApp.Data_Classes
 {
 
-    //Al of this code was auto-generated for this class, below, from ChatGTP interaction 12
+    //Al of this code was auto-generated for this class, below, from ChatGPT interaction 12
     using Microsoft.EntityFrameworkCore;
 
     public class ACCOUNTDBEntities : DbContext

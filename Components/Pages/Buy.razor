@@ -10,7 +10,9 @@
 @inject IStockService StockService   
 
 <PageTitle>Buy Stock</PageTitle>
+<h3 style="color: white; font-size: 30px;">Buy Stock</h3>
 
+<button class="std-button" @onclick="Hide">Return to Quotes</button>
 <button class="std-button" @onclick="GoMainNav">Return to Main Menu</button>
 <br />
 
@@ -40,7 +42,7 @@
             </table>
         </EditForm>
 
-        <button class="std-button" @onclick="Hide">Return to Quotes</button>
+        
         <label class="white-label">@messageBuy</label>
     </div>
 }
@@ -55,16 +57,16 @@ else
   //  [Parameter]
   //  public Quote quote { get; set; }
 
-    //Added above per ChatGTP Interaction 64, then took out per Interaction 66, stop trying to pass params, just use GlobalSettings.
+    //Added above per ChatGPT Interaction 64, then took out per Interaction 66, stop trying to pass params, just use GlobalSettings.
     
    // public string symbol = ;           //Changed to public from private, so Quotes.Razor can reference when showing Buy.Blazor.  Now commented out, will be a parameter via
-   //ChatGTP Interaction 64.  I must now fixup the calling page (Quotes,Razor) to pass the parameter 'symbol'.
+   //ChatGPT Interaction 64.  I must now fixup the calling page (Quotes,Razor) to pass the parameter 'symbol'.
     public bool isVisible = false;   //Changed to public from private, so Quotes.Razor can reference when showing Buy.Blazor
     public int? numShares;          //Changed to public from private, so Quotes.Razor can reference when showing Buy.Blazor
     public string labelText;        //Changed to public
     public string messageBuy;       //Added for confirm message
 
-    // Method to show the component with the selected stock symbol:  I commented these out during UI fixup stage after getting to ChatGTP Interaction 64
+    // Method to show the component with the selected stock symbol:  I commented these out during UI fixup stage after getting to ChatGPT Interaction 64
     
    /* public void Show(string selectedSymbol)
     {
@@ -87,7 +89,7 @@ else
         {
             try
             {
-                var result = await StockService.Buy(GlobalSettings.theCurrentQuote.Symbol, numShares.Value); //Fixup Needed:  Changed this call via Interaction 47 with ChatGTP
+                var result = await StockService.Buy(GlobalSettings.theCurrentQuote.Symbol, numShares.Value); //Fixup Needed:  Changed this call via Interaction 47 with ChatGPT
 
             }
             catch (Exception e)

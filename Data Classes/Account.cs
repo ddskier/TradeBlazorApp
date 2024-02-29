@@ -20,7 +20,7 @@
         [Column("BALANCE", TypeName = "decimal(12, 2)")]
         public decimal? Balance { get; set; }
 
-        //[Key]  Removed per CHatGTP Interaction 50 to avoid composite key error.  Instead using on ModelCreate override
+        //[Key]  Removed per ChatGPT Interaction 50 to avoid composite key error.  Instead using on ModelCreate override
         [Column("ACCOUNTID", TypeName = "bigint", Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)] // Assuming ACCOUNTID is provided and not auto-generated
         public long AccountId { get; set; }
@@ -32,7 +32,7 @@
         [Required]
         public int LoginCount { get; set; }
 
-        //[Key]  Removed per CHatGTP Interaction 50 to avoid composite key error.  Instead using on ModelCreate override[Key]
+        //[Key]  Removed per ChatGPT Interaction 50 to avoid composite key error.  Instead using on ModelCreate override[Key]
         [Column("PROFILE_USERID", TypeName = "varchar(50)", Order = 0)]
         [Required]
         public string ProfileUserId { get; set; }
